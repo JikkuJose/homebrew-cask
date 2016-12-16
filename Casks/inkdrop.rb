@@ -1,10 +1,21 @@
 cask 'inkdrop' do
-  version '0.11.0'
-  sha256 '23b47aa14a6531b3daf1ce96244b88255e43627a9b450b84220e1bfb70f095f5'
+  version '2.7.0'
+  sha256 'f7a5c7a30e46ead7c5229c4862a5a8edf721f375fe5a45795460d405d743882f'
 
-  url "https://www.inkdrop.info/api/update/Inkdrop-#{version}-Mac.zip"
+  # github.com/inkdropapp was verified as official when first introduced to the cask
+  url "https://github.com/inkdropapp/releases/releases/download/v#{version}/Inkdrop-#{version}-Mac.zip"
+  appcast 'https://github.com/inkdropapp/releases/releases.atom',
+          checkpoint: 'af10482547761f411cff498d1106fc8031d55e26faa6d873ec5a972be1ac4fdd'
   name 'Inkdrop'
   homepage 'https://www.inkdrop.info/'
 
-  app 'Inkdrop (Beta).app'
+  app 'Inkdrop.app'
+
+  zap delete: [
+                '~/Library/Application Support/inkdrop',
+                '~/Library/Saved Application State/info.pkpk.inkdrop.savedState',
+                '~/Library/Caches/info.pkpk.inkdrop',
+                '~/Library/Preferences/info.pkpk.inkdrop.plist',
+                '~/Library/Preferences/info.pkpk.inkdrop.helper.plist',
+              ]
 end
